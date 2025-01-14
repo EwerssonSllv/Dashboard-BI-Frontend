@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BI-Dashboards</title>
+    <link rel="stylesheet" href="./styles/styles.css">
     <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -15,28 +16,96 @@
     <div class="d-flex justify-content-center">
         <div class="spinner-border" role="status" id="loading"></div>
     </div>
-
-    <div class="d-flex">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <p class="h1 text-center flex-grow-1">Dashboards</p>
         <button
-          type="button"
-          class="btn btn-outline-dark text-left"
-          onclick="localStorage.removeItem('Authorization'); window.location = 'login.html'"
+            type="button"
+            class="btn btn-outline-dark"
+            onclick="localStorage.removeItem('Authorization'); window.location = 'login.html'"
         >
-          SignOut
+            SignOut
         </button>
-      </div>
+    </div>
+    
+    <div class="d-flex justify-content-end mb-3">
+        <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#createDashboardModal"
+        >
+            Criar Novo Dashboard
+        </button>
+    </div>
 
-      <table class="table table-hover">
+    <table class="table table-hover" id="tab">
+        <thead>
+            <tr>
+                <th scope="col">Estado</th>
+                <th scope="col">Venda</th>
+                <th scope="col">Preço Médio</th>
+                <th scope="col">Quantidade</th>
+            </tr>
+        </thead>
         <tbody id="dashboards"></tbody>
-      </table>
+    </table>
+    
+<div class="modal fade" id="createDashboardModal" tabindex="-1" aria-labelledby="createDashboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createDashboardModalLabel">Novo Dashboard</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="dashboardForm" onsubmit="event.preventDefault(); createDashboard();">
+                    <div class="mb-3">
+                        <label for="dashboardName" class="form-label">Nome do Dashboard</label>
+                        <input type="text" class="form-control" id="dashboardName" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="dashboardDescription" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="dashboardDescription" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Campos para Sales -->
+                    <div id="salesFields">
+                        <h6>Adicionar Vendas</h6>
+                        <div class="mb-3">
+                            <label for="state" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="state" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="sale" class="form-label">Venda</label>
+                            <input type="number" class="form-control" id="sale" min="0" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="average" class="form-label">Preço Médio</label>
+                            <input type="number" step="0.01" class="form-control" id="average" min="0" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" id="amount" min="0" required />
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn-primary">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     
       <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"></script>
+      <script src="/scripts/createSales.js"></script>
       <script src="/scripts/script.js"></script>
-
       <script>
           const token = localStorage.getItem("Authorization");
           if (!token) {

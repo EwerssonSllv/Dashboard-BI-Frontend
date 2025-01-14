@@ -1,0 +1,91 @@
+.table {
+    max-width: 80%; 
+    margin: 0 auto; 
+    border-collapse: collapse; 
+  }
+  
+  .table-hover th, 
+  .table-hover td {
+    padding: 12px; 
+    border: 1px solid #ddd; 
+    text-align: center; 
+  }
+  
+  .table-hover thead {
+    background-color: #f8f9fa; 
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f1f1f1; 
+  }
+  
+
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    width: 100%;
+  }
+  
+  .btn-primary {
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #adacac;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    width: 430px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #ccc;
+    color: #000000;
+    border-color: #727171;
+  }
+  
+  .btn-close-custom {
+    display: block;
+    margin: 10px auto;
+    background-color: transparent;
+    color: #555;
+    border: 2px solid #555;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-close-custom:hover {
+    background-color: #555;
+    color: #fff;
+    border-color: #333;
+  }
+
+  .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #444;
+  }
+  
+  /* Espaçamento interno */
+  .modal-body {
+    padding: 20px;
+  }
+  

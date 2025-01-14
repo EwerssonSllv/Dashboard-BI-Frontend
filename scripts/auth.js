@@ -1,0 +1,76 @@
+const signupEndpoint = "https://bi-app-qvw1.onrender.com/auth/register";
+const signinEndpoint = "https://bi-app-qvw1.onrender.com/auth/login";
+
+async function signup() {
+    let login = document.getElementById("login").value;
+    let password = document.getElementById("password").value;
+
+    const response = await fetch(signupEndpoint, {
+        method: "POST",
+        headers: new Headers({
+            "Content-Type": "application/json; charset=utf-8",
+            Accept: "application/json",
+        }),
+        body: JSON.stringify({
+            login: login,
+            password: password
+        }),
+    });
+
+    if (response.ok) {
+        signin();
+    } else {
+        try {
+            const errorData = await response.json();
+            console.error("Erro no registro:", errorData);
+            showToast("#errorToast", errorData.message || "Erro ao realizar o registro.");
+        } catch (e) {
+            console.error("Erro ao tentar processar a resposta do servidor:", e);
+            showToast("#errorToast", "Erro inesperado no servidor.");
+        }
+    }
+}
+
+async function signin() {
+    const login = document.getElementById("login").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch(signinEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({ login, password }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const token = data.token;
+
+            if (token) {
+                window.localStorage.setItem("Authorization", token);
+                console.log("Login realizado com sucesso!");
+                window.location = "index.html"; 
+            }
+            showToast("#okToast", "Login bem-sucedido!");
+        } else {
+            const errorData = await response.json();
+            console.error("Erro no login:", errorData);
+            showToast("#errorToast", errorData.message || "Erro ao realizar login.");
+        }
+    } catch (error) {
+        console.error("Erro ao tentar logar:", error);
+        showToast("#errorToast", "Erro inesperado ao realizar login.");
+    }
+}
+
+function showToast(id, message) {
+    const toastEl = document.querySelector(id);
+    if (toastEl) {
+        const messageEl = toastEl.querySelector(".toast-body");
+        if (messageEl) messageEl.textContent = message; 
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    }
+}
