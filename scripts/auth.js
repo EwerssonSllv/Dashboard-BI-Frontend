@@ -18,15 +18,20 @@ async function signup() {
     });
 
     if (response.ok) {
-        signin();
+        signin();  
     } else {
         try {
+
             const errorData = await response.json();
-            console.error("Erro no registro:", errorData);
-            showToast("#errorToast", errorData.message || "Erro ao realizar o registro.");
+            if (errorData.message && errorData.message.includes("User already exists!")) {
+                showToast("#errorToast", "O Usuário já existe!");  
+            } else {
+                console.error("Erro no registro:", errorData);
+                showToast("#errorToast", errorData.message || "Erro ao realizar o registro.");
+            }
         } catch (e) {
             console.error("Erro ao tentar processar a resposta do servidor:", e);
-            showToast("#errorToast", "Erro inesperado no servidor.");
+            showToast("#errorToast", "Erro inesperado no servidor. É possível que o usuário já exista");
         }
     }
 }
@@ -56,11 +61,15 @@ async function signin() {
             showToast("#okToast", "Login bem-sucedido!");
         } else {
             const errorData = await response.json();
-            console.error("Erro no login:", errorData);
-            showToast("#errorToast", errorData.message || "Erro ao realizar login.");
+
+            if (errorData.message && errorData.message.includes("User not found!")) {
+                showToast("#errorToast", "Usuário não encontrado. Verifique seu login e tente novamente.");
+            } else {
+                console.error("Erro no login:", errorData);
+                showToast("#errorToast", errorData.message || "Erro ao realizar login.");
+            }
         }
     } catch (error) {
-        console.error("Erro ao tentar logar:", error);
         showToast("#errorToast", "Erro inesperado ao realizar login.");
     }
 }
