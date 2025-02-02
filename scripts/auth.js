@@ -1,8 +1,6 @@
-// const signupEndpoint = "https://bi-app-qvw1.onrender.com/auth/register";
-// const signinEndpoint = "https://bi-app-qvw1.onrender.com/auth/login";
 
-const signupEndpoint = "http://localhost:8082/auth/register"
-const signinEndpoint = "http://localhost:8082/auth/login"
+const signupEndpoint = "https://bi-app-qvw1.onrender.com/auth/register"
+const signinEndpoint = "https://bi-app-qvw1.onrender.com/auth/login"
 
 async function signup() {
     let login = document.getElementById("login").value;

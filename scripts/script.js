@@ -1,4 +1,4 @@
-const endpoint = "http://localhost:8082/nlp/query";
+const endpoint = "https://bi-app-qvw1.onrender.com/nlp/query";
 
 document.getElementById("searchInput").addEventListener("keydown", searchItems);
 
