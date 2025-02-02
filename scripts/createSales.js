@@ -48,7 +48,6 @@ async function createDashboard() {
             throw new Error(`Erro ${salesResponse.status}: ${salesResponse.statusText}`);
         }
 
-        const salesData = await salesResponse.json();
         window.location.reload(); 
     } catch (error) {
         alert('Falha ao criar Dashboard ou Sales. Verifique os dados e tente novamente.');
