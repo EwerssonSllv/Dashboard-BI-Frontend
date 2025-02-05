@@ -1,8 +1,8 @@
 // Endpoints
-const endpoint = "http://localhost:8082/nlp/query";
-const endpointProduct = "http://localhost:8082/products";
-const endpointAllProducts = "http://localhost:8082/products/all";
-const endpointSales = "http://localhost:8082/sales/{productID}";
+const endpoint = "https://bi-app-qvw1.onrender.com/nlp/query";
+const endpointProduct = "https://bi-app-qvw1.onrender.com/products";
+const endpointAllProducts = "https://bi-app-qvw1.onrender.com/products/all";
+const endpointSales = "https://bi-app-qvw1.onrender.com/sales/{productID}";
 
 // Funções de UI
 
